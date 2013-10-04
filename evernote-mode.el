@@ -149,21 +149,41 @@
 ;; User options
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar evernote-username nil
-  "*An username of your evernote")
+(defgroup evernote nil
+  "Emacs evernote mode offers functions to refer and edit
+   Evernote notes directly from Emacs. OAuth enabled fork of
+   code.google.com repository."
+  :link '(url-link "https://github.com/pymander/evernote-mode")
+  :prefix "evernote-"
+  :group 'external)
 
-(defvar evernote-enml-formatter-command nil
-  "*Formatter for xhtml")
+(defcustom evernote-username nil
+  "*An username of your evernote"
+  :group 'evernote
+  :type '(list string))
 
-(defvar evernote-ruby-command "ruby"
-  "*Path of the ruby command")
+(defcustom evernote-enml-formatter-command 
+  '("w3m" "-dump" "-I" "UTF8" "-O" "UTF8")
+  "*Formatter for xhtml"
+  :group 'evernote)
 
-(defvar evernote-password-cache nil
+(defcustom evernote-ruby-command "ruby"
+  "*Path of the ruby command"
+  :group 'evernote
+  :type '(list string))
+
+(defcustom evernote-password-cache nil
   "*Non-nil means that password cache is enabled.
-It is recommended to encrypt the file with EasyPG.")
+   It is recommended to encrypt the file with EasyPG."
+    :group 'evernote
+  :type '(list string))
 
-(defvar evernote-developer-token nil
-  "*An developer token of your evernote")
+(defcustom evernote-developer-token nil
+  "*An developer token of your evernote."
+  :link '(url-link 
+          "http://dev.evernote.com/doc/articles/authentication.php#devtoken")
+  :group 'evernote
+  :type '(list string))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Interface for evernote-browsing-mode.
