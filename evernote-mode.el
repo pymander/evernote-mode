@@ -2324,7 +2324,8 @@
                   (string= (cdr (assq 'name nb)) "Captures"))
           return nb)))
 
-(defun enh-get-notes-for-notebook (nb)
+;; Not yet ready...
+;; (defun enh-get-notes-for-notebook (nb)
   
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
