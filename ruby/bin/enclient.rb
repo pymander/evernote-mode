@@ -1,4 +1,4 @@
-#! /usr/bin/ruby1.9.1 -sWKu
+#! /usr/bin/ruby -sWKu
 # -*- coding: utf-8 -*-
 
 #
@@ -91,6 +91,7 @@ module EnClient
 
     def deserialize(str)
       fields = str.split ","
+      
       fields.each do |f|
         f =~ /\A([^=]*)=(.*)\z/
         varsym = $1.to_sym
@@ -311,9 +312,9 @@ module EnClient
   ERROR_CODE_NOT_AUTHED = 102
   ERROR_CODE_TIMEOUT    = 103
 
-  LOG = Logger.new File.expand_path("~/.evernote-mode.log"), 3
+  LOG = Logger.new File.expand_path("./evernote-mode.log"), 3
   #LOG = Logger.new $stdout
-  LOG.level = Logger::WARN
+  LOG.level = Logger::DEBUG
 
 
   class NotAuthedException < StandardError; end
@@ -886,7 +887,8 @@ module EnClient
       if dm.during_full_sync?
         get_result_from_server
       else
-        get_result_from_local_cache
+        #get_result_from_local_cache
+        get_result_from_server
       end
     end
 
@@ -988,7 +990,8 @@ module EnClient
       if dm.during_full_sync? && !@@issued_before
         get_result_from_server
       else
-        get_result_from_local_cache
+        #get_result_from_local_cache
+        get_result_from_server
       end
     end
 
@@ -1239,6 +1242,7 @@ module EnClient
     end
 
     def authenticate(user, passwd)
+      LOG.info user
       appname = "kawayuu"
       appid = "24b37bd1326624a0"
       @user_store = create_user_store
