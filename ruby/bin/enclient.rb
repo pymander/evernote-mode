@@ -889,7 +889,6 @@ module EnClient
         get_result_from_server
       else
         get_result_from_local_cache
-        #get_result_from_server
       end
     end
 
