@@ -990,8 +990,7 @@ module EnClient
       if dm.during_full_sync? && !@@issued_before
         get_result_from_server
       else
-        #get_result_from_local_cache
-        get_result_from_server
+        get_result_from_local_cache
       end
     end
 
@@ -1242,7 +1241,6 @@ module EnClient
     end
 
     def authenticate(user, passwd)
-      LOG.info user
       appname = "kawayuu"
       appid = "24b37bd1326624a0"
       @user_store = create_user_store
