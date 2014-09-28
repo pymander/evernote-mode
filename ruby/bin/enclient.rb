@@ -1,4 +1,4 @@
-#! /usr/bin/ruby1.9.1 -sWKu
+#! /usr/bin/ruby -sWKu
 # -*- coding: utf-8 -*-
 
 #
@@ -92,12 +92,14 @@ module EnClient
     def deserialize(str)
       fields = str.split ","
       fields.each do |f|
-        f =~ /\A([^=]*)=(.*)\z/
+        f =~ /([^=]*)=(.*)\z/
+        if $1.nil? then
+          next;
+        end
         varsym = $1.to_sym
         varval_str = $2
         vartype = serialized_fields[varsym]
-        #puts "[#{varsym}], [#{varval_str}], [#{vartype}]"
-
+        #LOG.debug "[#{varsym}], [#{varval_str}], [#{vartype}]"
         varval =
           if varval_str
             case vartype
