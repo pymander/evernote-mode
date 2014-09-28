@@ -91,14 +91,15 @@ module EnClient
 
     def deserialize(str)
       fields = str.split ","
-      
       fields.each do |f|
-        f =~ /\A([^=]*)=(.*)\z/
+        f =~ /([^=]*)=(.*)\z/
+        if $1.nil? then
+          next;
+        end
         varsym = $1.to_sym
         varval_str = $2
         vartype = serialized_fields[varsym]
-        #puts "[#{varsym}], [#{varval_str}], [#{vartype}]"
-
+        #LOG.debug "[#{varsym}], [#{varval_str}], [#{vartype}]"
         varval =
           if varval_str
             case vartype
@@ -887,8 +888,8 @@ module EnClient
       if dm.during_full_sync?
         get_result_from_server
       else
-        #get_result_from_local_cache
-        get_result_from_server
+        get_result_from_local_cache
+        #get_result_from_server
       end
     end
 
